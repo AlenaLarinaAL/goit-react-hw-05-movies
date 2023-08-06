@@ -1,12 +1,14 @@
+import { useLocation } from 'react-router-dom';
 import { List, LinkStyled, Title } from './MovieList.styled';
 import PropTypes from 'prop-types';
 
 export const MovieList = ({ movies }) => {
+  const location = useLocation();
   return (
     <List>
       {movies.map(({ id, title, poster_path }) => (
         <li key={id}>
-          <LinkStyled to={`/movies/${id}`}>
+          <LinkStyled to={`/movies/${id}`} state={{ from: location }}>
             <img
               src={
                 poster_path

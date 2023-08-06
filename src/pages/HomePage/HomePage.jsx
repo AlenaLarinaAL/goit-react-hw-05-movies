@@ -5,21 +5,21 @@ import { fetchMovies } from 'services/Api';
 
 const Home = () => {
   const [topMovies, setTopMovies] = useState([]);
-  const [isLoadind, setIsloading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setIsloading(true);
+    setLoading(true);
     fetchMovies()
       .then(setTopMovies)
       .catch(console.log)
-      .finally(setIsloading(false));
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <>
       <Section title="Trending today">
-        {isLoadind && <Spinner />}
-        {topMovies.length && <MovieList movies={topMovies} />}
+        {loading && <Spinner />}
+        {topMovies.length > 0 && <MovieList movies={topMovies} />}
       </Section>
     </>
   );

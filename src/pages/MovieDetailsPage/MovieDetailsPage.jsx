@@ -1,5 +1,5 @@
 import { Movie, Section, Spinner } from 'components';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { fetchMovie } from 'services/Api';
 import { LinkStyled, LinkItem, List } from './MovieDetailsPage.styled';
@@ -12,7 +12,7 @@ const MovieDetailsPage = () => {
   const [movieData, setMovieData] = useState(null);
 
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
+  const backLinkHref = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     setLoading(true);
@@ -26,7 +26,7 @@ const MovieDetailsPage = () => {
     <>
       <Section>
         {loading && <Spinner />}
-        <LinkStyled to={backLinkHref}>
+        <LinkStyled to={backLinkHref.current}>
           <BiArrowBack size={25} />
         </LinkStyled>
         {movieData && <Movie movieData={movieData} />}
