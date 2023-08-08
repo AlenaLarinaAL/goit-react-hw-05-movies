@@ -17,7 +17,6 @@ export const MovieList = ({ movies }) => {
               }
               alt={title}
             />
-
             <div>
               <Title>{title}</Title>
             </div>

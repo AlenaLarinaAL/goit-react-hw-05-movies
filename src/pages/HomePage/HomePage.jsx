@@ -1,5 +1,4 @@
 import { Section, Spinner, MovieList } from 'components';
-
 import { useEffect, useState } from 'react';
 import { fetchMovies } from 'services/Api';
 
@@ -19,7 +18,7 @@ const Home = () => {
     <>
       <Section title="Trending today">
         {loading && <Spinner />}
-        {topMovies.length > 0 && <MovieList movies={topMovies} />}
+        {!!topMovies.length && <MovieList movies={topMovies} />}
       </Section>
     </>
   );
